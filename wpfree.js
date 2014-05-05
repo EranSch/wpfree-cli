@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var program = require('commander'),
-	config  = require('./config').config,
+	config  = require('./config'),
     nconf   = require('nconf');
 
 nconf.file(config.confPath);
@@ -13,7 +13,7 @@ program
     .command('init')
     .description('initial configuration of wpfree-cli')
     .action(function() {
-        require('./setup').setup(config);
+        require('./setup')(nconf);
     });
 
 program

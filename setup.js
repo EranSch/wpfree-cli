@@ -1,8 +1,6 @@
-var setup = function(config) {
+module.exports = function(nconf) {
 
     var fs 		  = require('fs-extra'),
-        nconf 	  = require('nconf'),
-        confPath  = config.confPath,
         clc    	  = require('cli-color'),
         prompt    = require('prompt'),
         newConfig = function(){ 
@@ -32,7 +30,6 @@ var setup = function(config) {
 
         	prompt.get(props, function (err, result) {
         	  if (err) throw err;
-        	  nconf.file(confPath);
         	  nconf.set('server:host', result.host);
         	  nconf.set('server:user', result.user);
         	  nconf.set('server:port', result.port);
@@ -45,14 +42,14 @@ var setup = function(config) {
         prompt.message = "[wpfree-cli] ".green;
 
 
-    fs.exists(confPath, function(exists) {
+    fs.exists(nconf.stores.file.file, function(exists) {
         if (!exists) {
-            fs.outputJson(confPath, {name: 'wp-free local configfiguration'}, function(err){
+            fs.outputJson(nconf.stores.file.file, {name: 'wp-free local configfiguration'}, function(err){
             	if (err) throw err;
         		newConfig();
             });
         }else{
-        	fs.readJson(confPath, function(err, data) {
+        	fs.readJson(nconf.stores.file.file, function(err, data) {
         	  console.log(clc.green.bold('Current Configuration below.'));
         	  console.dir(data);
         	  prompt.start();
@@ -62,7 +59,7 @@ var setup = function(config) {
         	  }], function(err, res){
         	  	if (err) throw err;
         	  	if(res.reconfigure == 'y' || res.reconfigure == 'Y'){
-        	  		fs.remove(confPath, function(err){
+        	  		fs.remove(nconf.stores.file.file, function(err){
         	  			if (err) throw err;
         	  			newConfig();
         	  		});
@@ -72,6 +69,3 @@ var setup = function(config) {
         }
     });    
 };
-
-
-exports.setup = setup;
