@@ -39,7 +39,7 @@ program
 
 program
     .command('*')
-    .description('commang not found')
+    .description('command not found')
     .action(function(env) {
         program.help();
     });
