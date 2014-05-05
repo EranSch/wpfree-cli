@@ -11,14 +11,33 @@ WP Freedom is currently in the early stages of conception. WP Freedom is a deplo
 
 
 ##Usage
-```node wpfree --help``` 
-Eventually this will be ready for global installation via `npm -g` but we're not there yet. 
+Currently, this tool should just be run as `node wpfree.js` although you can leave off the ".js". Eventually this will be ready for global installation via `npm -g` but we're not there yet. Here's how to get the most out of your wpfree-cli experience: 
 
-1. *ProTip:* Set up an alias in your shell so you don't have to type `node wpfree` all the time while we're in development. I went with `wpfree`:)
+1. *ProTip:* Set up an alias in your shell so you don't have to type `node wpfree` all the time while we're in development. I went with `wpfree` :)
 2. `node wpfree init` to configure settings for the remote server
 3. `node wpfree test` to ensure configuration details are solid. 
 4. `node wpfree create <example.com>` to build and enable a new WordPress site on your remote server. 
 5. More to come soon :)
+
+##`wpfree --help`
+```
+
+  Usage: wpfree [options] [command]
+
+  Commands:
+
+    init                   initial configuration of wpfree-cli
+    list                   lists existing sites
+    create <domain-name>   run the given remote command
+    test                   test for connectivity to WP Freedom server
+    *                      command not found
+
+  Options:
+
+    -h, --help     output usage information
+    -V, --version  output the version number
+
+```
 
 ##Goals
 - ~~Persist local configuration~~
